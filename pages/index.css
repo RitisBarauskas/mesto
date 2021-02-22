@@ -25,6 +25,7 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 @import url('../blocks/edit-form/edit-form.css');
+@import url('../blocks/edit-form/_opened/edit-form_opened.css');
 @import url('../blocks/edit-form/__popup/edit-form__popup.css');
 @import url('../blocks/edit-form/__form/edit-form__form.css');
 @import url('../blocks/edit-form/__title/edit-form__title.css');

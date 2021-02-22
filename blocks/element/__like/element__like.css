@@ -5,3 +5,7 @@
     height: 19px;
     background-image: 22px 19px;
 }
+
+.element__like:hover {
+    opacity: .5;
+}

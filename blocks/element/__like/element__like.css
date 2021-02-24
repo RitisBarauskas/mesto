@@ -3,7 +3,7 @@
     background-image: url('../../../images/na-like.svg');
     min-width: 22px;
     height: 19px;
-    background-image: 22px 19px;
+    background-size: 22px 19px;
 }
 
 .element__like:hover {

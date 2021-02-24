@@ -9,7 +9,9 @@
 <body class="body">
   <div class="page">        
       <header class="header">
-        <div class="header__logo"></div>
+        <a href="/" class="header__link">
+          <div class="header__logo"></div>
+        </a>
         <div class="header__line"></div>
       </header>
       <main class="main">
@@ -44,7 +46,7 @@
               <img src="images/places/permsky.jpg" alt="Пермский край" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">Пермский край</h2>
-                <a href="#" class="element__like"></a>
+                <a href="#" class="element__like element__like_active"></a>
               </div>
             </li>
             <li class="elements__item element">
@@ -81,13 +83,13 @@
         <h2 class="edit-form__title">
           Редактировать профиль
         </h2>      
-        <input class="edit-form__item-form" type="text" name="title" value="Жак-Ив Кусто">
-        <input class="edit-form__item-form" type="text" name="subtitle" value="Исследователь океана">
+        <input class="edit-form__item-form" type="text" name="title" value="">
+        <input class="edit-form__item-form" type="text" name="subtitle" value="">
         <input class="edit-form__button" type="submit" value="Сохранить">
       </form>
       <a href="#" class="edit-form__close"></a>
     </div>             
   </div>
-  
+  <script src="scripts/edit-form.js"></script> 
 </body>
 </html>

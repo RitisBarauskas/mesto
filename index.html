@@ -12,7 +12,6 @@
         <a href="#" class="header__link" target="_self">
           <div class="header__logo"></div>
         </a>
-        <div class="header__line"></div>
       </header>
       <main class="main">
         <section class="profile">
@@ -20,54 +19,54 @@
             <div class="profile__avatar"></div>            
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <a href="#" class="profile__edit-button" target="_self"></a>
+              <button type="button" class="profile__edit-button"></button>
               <p class="profile__subtitle">Исследователь океана</p>
             </div>
           </div>
-          <a href="#" class="profile__add-button" target="_self"></a>
+          <button type="button" class="profile__add-button"></button>
         </section>
-        <section class="elements">
-          <ul class="elements__list">
-            <li class="elements__item element">
+        <section class="places">
+          <ul class="places__list">
+            <li class="places__item element">
               <img src="images/places/alapaevsk.jpg" alt="Алапаевск" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">Алапаевск</h2>
-                <a href="#" class="element__like" target="_self"></a>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="elements__item element">
               <img src="images/places/bashkiria.jpg" alt="Башкирия" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">Башкирия</h2>
-                <a href="#" class="element__like" target="_self"></a>
+                <button type="button" class="element__like""></button>
               </div>
             </li>
             <li class="elements__item element">
               <img src="images/places/permsky.jpg" alt="Пермский край" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">Пермский край</h2>
-                <a href="#" class="element__like element__like_active" target="_self"></a>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="elements__item element">
               <img src="images/places/chusovaya.jpg" alt="Пещера Чудесница (р. Чусовая)" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">Пещера Чудесница (р. Чусовая)</h2>
-                <a href="#" class="element__like" target="_self"></a>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="elements__item element">
               <img src="images/places/usva.jpg" alt="Усьва" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">р. Усьва</h2>
-                <a href="#" class="element__like" target="_self"></a>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
             <li class="elements__item element">
               <img src="images/places/zilim.jpg" alt="Зилим" class="element__image">
               <div class="element__info">
                 <h2 class="element__title">р. Зилим</h2>
-                <a href="#" class="element__like" target="_self"></a>
+                <button type="button" class="element__like"></button>
               </div>
             </li>
           </ul>
@@ -77,19 +76,19 @@
         <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
       </footer>      
   </div>
-  <div class="edit-form">
-    <div class="edit-form__popup">
-      <form class="edit-form__form">
-        <h2 class="edit-form__title">
-          Редактировать профиль
-        </h2>      
-        <input class="edit-form__item-form" type="text" name="title" value="">
-        <input class="edit-form__item-form" type="text" name="subtitle" value="">
-        <input class="edit-form__button" type="submit" value="Сохранить">
+  <div class="popup">
+    <div class="popup__container">
+      <h2 class="popup__title">
+        Редактировать профиль
+      </h2> 
+      <form class="popup__form" name="profile-form">             
+        <input class="popup__item-form" type="text" name="title" value="" placeholder="Имя">
+        <input class="popup__item-form" type="text" name="subtitle" value="" placeholder="Профессия">
+        <input class="popup__button" type="submit" value="Сохранить">
       </form>
-      <a href="#" class="edit-form__close" target="_self"></a>
+      <button type="button" class="popup__close"></button>
     </div>             
   </div>
-  <script src="scripts/edit-form.js"></script> 
+  <script src="scripts/index.js"></script> 
 </body>
 </html>

@@ -1,4 +1,4 @@
-.edit-form__close {
+.popup__close {
     position: absolute;
     background-image: url('../../../images/plus.svg');
     width: 40px;
@@ -9,14 +9,16 @@
     right: -40px;
     transform: rotate(45deg);
     cursor: pointer;
+    border: 0;
+    background-color: transparent;
 }
 
-.edit-form__close:hover {
+.popup__close:hover {
     opacity: .6;
 }
 
 @media screen and (max-width: 700px) {
-    .edit-form__close {
+    .popup__close {
         width: 26px;
         height: 26px;
         background-size: 26px 26px;

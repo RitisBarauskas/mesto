@@ -46,7 +46,6 @@ function newCard(link, name){
         openPopup('.popup_view-pic');
         const bigPic = bigPicTemplate.querySelector('.popup__container').cloneNode(true);
         bigPic.querySelector('.popup__title').textContent = name;
-        console.log(name);
         bigPic.querySelector('.popup__image').src = link;
         bigPic.querySelector('.popup__image').alt = name;
         const popup = document.querySelector('.popup_view-pic');

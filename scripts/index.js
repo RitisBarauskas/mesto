@@ -42,6 +42,8 @@ const profileTitle = profile.querySelector('.profile__title');
 const profileSubTitle = profile.querySelector('.profile__subtitle');
 const saveEditForm = popupEditForm.querySelector('.popup__button');
 const closeNewCard = popupNewCard.querySelector('.popup__close');
+const popupBigPicImage = popupBigPic.querySelector('.popup__image');
+const popupBigPicTitle = popupBigPic.querySelector('.popup__title');
 
 function newCard(link, name){
     const placeCardElement = placeCardTemplate.querySelector('.element').cloneNode(true);
@@ -58,11 +60,10 @@ function newCard(link, name){
         eventTarget.parentElement.remove();
       });
     placeElementImage.addEventListener('click', function (evt) {
-        openPopup(popupBigPic);
-        popupPic = popupBigPic.querySelector('.popup__image');
-        popupPic.src = link;
-        popupPic.alt = name;
-        popupBigPic.querySelector('.popup__title').textContent = name;      
+        openPopup(popupBigPic);        
+        popupBigPicImage.src = link;
+        popupBigPicImage.alt = name;
+        popupBigPicTitle.textContent = name;      
       });
     placesList.prepend(placeCardElement);
 }

@@ -60,10 +60,10 @@ function newCard(link, name){
         eventTarget.parentElement.remove();
       });
     placeElementImage.addEventListener('click', function (evt) {
-        openPopup(popupBigPic);        
+        openPopup(popupBigPic);
         popupBigPicImage.src = link;
         popupBigPicImage.alt = name;
-        popupBigPicTitle.textContent = name;      
+        popupBigPicTitle.textContent = name;
       });
     placesList.prepend(placeCardElement);
 }

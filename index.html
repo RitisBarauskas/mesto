@@ -39,9 +39,15 @@
       <h2 class="popup__title">
         Редактировать профиль
       </h2> 
-      <form class="popup__form" name="profile-form">             
-        <input class="popup__input" type="text" name="title" value="" placeholder="Имя">
-        <input class="popup__input" type="text" name="subtitle" value="" placeholder="Профессия">
+      <form class="popup__form" name="profile-form">
+        <label class="popup__label">
+          <input class="popup__input" type="text" name="title" value="" placeholder="Имя">
+          <span class="popup__input-error"></span>
+        </label>
+        <label class="popup__label">
+          <input class="popup__input" type="text" name="subtitle" value="" placeholder="Профессия">
+          <span class="popup__input-error"></span>
+        </label>
         <input class="popup__button" type="submit" value="Сохранить">
       </form>
       <button type="button" class="popup__close"></button>
@@ -52,10 +58,16 @@
       <h2 class="popup__title">
        Новое место
       </h2> 
-      <form class="popup__form" name="new-place">             
-        <input class="popup__input" type="text" name="name" value="" placeholder="Название">
-        <input class="popup__input" type="text" name="link" value="" placeholder="Ссылка на картинку">
-        <input class="popup__button" type="submit" value="Создать">
+      <form class="popup__form" name="new-place">
+        <label class="popup__label">
+          <input class="popup__input" type="text" name="name" value="" placeholder="Название">
+          <span class="popup__input-error">Вы пропустили это поле</span>
+        </label>
+        <label class="popup__label">
+          <input class="popup__input popup__input_invalid" type="text" name="link" value="" placeholder="Ссылка на картинку">
+          <span class="popup__input-error">Введите адрес сайта</span>
+        </label>
+        <input class="popup__button popup__button_no-active" type="submit" value="Создать">
       </form>
       <button type="button" class="popup__close"></button>
     </div>             

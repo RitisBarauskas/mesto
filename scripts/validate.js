@@ -11,7 +11,7 @@ function checkInputValidity(formElement, inputElement) {
 }
 
 function setEventListener(formElement) {
-    // Обрабатываем все поля полченных форм
+    // Обрабатываем все поля полученных форм
 }
 
 function enableValidation(arr) {

@@ -40,10 +40,11 @@ const closeEditForm = popupEditForm.querySelector('.popup__close');
 const addButton = profile.querySelector('.profile__add-button');
 const profileTitle = profile.querySelector('.profile__title');
 const profileSubTitle = profile.querySelector('.profile__subtitle');
-const saveEditForm = popupEditForm.querySelector('.popup__button');
 const closeNewCard = popupNewCard.querySelector('.popup__close');
 const popupBigPicImage = popupBigPic.querySelector('.popup__image');
 const popupBigPicTitle = popupBigPic.querySelector('.popup__title');
+
+
 
 function newCard(link, name){
     const placeCardElement = placeCardTemplate.querySelector('.element').cloneNode(true);
@@ -107,4 +108,26 @@ popupNewCard.addEventListener('submit', function(evt) {
     closePopup(popupNewCard);    
 });
 
+popupBigPic.addEventListener('mousedown', (evt) => {
+    if (evt.target.closest('.popup__container') === null){
+        closePopup(popupBigPic);
+    }
+});
+popupEditForm.addEventListener('mousedown', (evt) => {
+    if (evt.target.closest('.popup__container') === null){
+        closePopup(popupEditForm);
+    }
+});
+popupNewCard.addEventListener('mousedown', (evt) => {
+    if (evt.target.closest('.popup__container') === null){
+        closePopup(popupNewCard);
+    }
+});
 
+document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+        closePopup(popupBigPic);
+        closePopup(popupEditForm);
+        closePopup(popupNewCard);
+    }
+})

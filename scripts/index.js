@@ -1,29 +1,39 @@
 const initialCards = [
-    {
-      name: 'Алапаевск',
-      link: 'images/places/alapaevsk.jpg'
-    },
-    {
-      name: 'Башкирия',
-      link: 'images/places/bashkiria.jpg'
-    },
-    {
-      name: 'Пермский край',
-      link: 'images/places/permsky.jpg'
-    },
-    {
-      name: 'Пещера Чудесница (р. Чусовая)',
-      link: 'images/places/chusovaya.jpg'
-    },
-    {
-      name: 'р. Усьва (Пермский край)',
-      link: 'images/places/usva.jpg'
-    },
-    {
-      name: 'р. Зилим (Башкирия)',
-      link: 'images/places/zilim.jpg'
-    }
-  ];
+  {
+    name: 'Алапаевск',
+    link: 'images/places/alapaevsk.jpg'
+  },
+  {
+    name: 'Башкирия',
+    link: 'images/places/bashkiria.jpg'
+  },
+  {
+    name: 'Пермский край',
+    link: 'images/places/permsky.jpg'
+  },
+  {
+    name: 'Пещера Чудесница (р. Чусовая)',
+    link: 'images/places/chusovaya.jpg'
+  },
+  {
+    name: 'р. Усьва (Пермский край)',
+    link: 'images/places/usva.jpg'
+  },
+  {
+    name: 'р. Зилим (Башкирия)',
+    link: 'images/places/zilim.jpg'
+  }
+];
+
+
+
+
+
+// class FormValidator {
+//   constructor(data) {
+//     this.data = data;
+//   }
+// }
 
 const popups = document.querySelectorAll('.popup');
 const placeCardTemplate = document.querySelector('#place-card').content;
@@ -121,3 +131,35 @@ const closeByEscape = (evt) => {
         closePopup(openedPopup);
     }
 }
+
+
+class Card {
+  constructor(selector, name, link) {
+    this.selector = selector;
+    this.name = name;
+    this.link = link;
+    this.isLiked = false;
+  }
+
+  _getTemplate() {
+    const cardElement = document.querySelector(this.selector).content.querySelector('.card').cloneNode(true);
+    return cardElement;
+  }
+
+  generateCard() {
+    this._card = this._getTemplate();
+    this._card.querySelector('.element__title').textContent = this.name;
+    this._cardImage = this.querySelector('.element__image');
+    this._cardImage.src = this.link;
+    this._cardImage.alt = this.name;
+
+    return this._card;
+  }
+}
+
+initialCards.forEach(function (item) {
+  const card = new Card('#place-card', item.name, item.link);
+  const newCard = card.generateCard();
+  console.log('Hi!')
+  placesList.prepend(newCard);
+})

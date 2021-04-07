@@ -7,22 +7,22 @@ class Card {
     }
 
     _getTemplate() {
-        const cardElement = document
+        this._cardElement = document
             .querySelector(this.cardSelector)
             .content
             .querySelector('.element')
             .cloneNode(true);
-        return cardElement;
+        return this._cardElement;
     }
 
     _like(evt) {
-        const eventTarget = evt.target;
-        eventTarget.classList.toggle('element__like_active');
+        this._eventTarget = evt.target;
+        this._eventTarget.classList.toggle('element__like_active');
     }
 
     _trash(evt) {
-        const eventTarget = evt.target;
-        eventTarget.parentElement.remove();
+        this._eventTarget = evt.target;
+        this._eventTarget.parentElement.remove();
     }
 
     generateCard() {

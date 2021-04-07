@@ -1,6 +1,6 @@
-import {initialCards} from './data.js';
+import {initialCards, validConfig} from './data.js';
 import {Card} from './card.js';
-import {ValidateForm} from './validate.js';
+import {FormValidator} from './validate.js';
 
 const placesList = document.querySelector('.places__list');
 const popups = document.querySelectorAll('.popup');
@@ -58,6 +58,8 @@ const closeByEscape = (evt) => {
 
 editButton.addEventListener('click', function() {
     openPopup(popupEditForm);
+    const newValidForm = new FormValidator(validConfig, '.popup_edit-profile')
+    newValidForm.enableValidation();
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileSubTitle.textContent;
   });

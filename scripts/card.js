@@ -1,3 +1,10 @@
+import {openPopup} from './utils.js';
+
+
+const popupBigPic = document.querySelector('.popup_view-pic');
+const popupBigPicImage = popupBigPic.querySelector('.popup__image');
+const popupBigPicTitle = popupBigPic.querySelector('.popup__title');
+
 
 class Card {
     constructor(cardSelector, cardTitle, cardLink) {
@@ -33,6 +40,12 @@ class Card {
         this._cardImage.alt = this.cardTitle;
         this._card.querySelector('.element__like').addEventListener('click', (evt) => this._like(evt));
         this._card.querySelector('.element__trash').addEventListener('click', (evt) => this._trash(evt));
+        this._card.querySelector('.element__image').addEventListener('click', () => {
+            openPopup(popupBigPic);
+            popupBigPicImage.src = this.cardLink;
+            popupBigPicImage.alt = this.cardTitle;
+            popupBigPicTitle.textContent = this.cardTitle;
+          });
         return this._card;
       }
 }

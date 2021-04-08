@@ -1,6 +1,6 @@
 import {initialCards, validConfig} from './data.js';
 import {Card} from './card.js';
-import {FormValidator} from './validate.js';
+import {FormValidator} from './formvalidator.js';
 import {openPopup, closePopup} from './utils.js';
 
 

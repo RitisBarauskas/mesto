@@ -1,7 +1,7 @@
 import './pages/index.css';
 import {initialCards, validConfig} from './scripts/data.js';
-import {Card} from './scripts/card.js';
-import {FormValidator} from './scripts/formvalidator.js';
+import {Card} from './scripts/classes/card.js';
+import {FormValidator} from './scripts/classes/formvalidator.js';
 import {openPopup, closePopup} from './scripts/utils.js';
 import {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic} from './scripts/constants.js';
 

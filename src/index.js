@@ -1,8 +1,9 @@
-import {initialCards, validConfig} from './data.js';
-import {Card} from './card.js';
-import {FormValidator} from './formvalidator.js';
-import {openPopup, closePopup} from './utils.js';
-import {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic} from './constants.js';
+import './pages/index.css';
+import {initialCards, validConfig} from './scripts/data.js';
+import {Card} from './scripts/card.js';
+import {FormValidator} from './scripts/formvalidator.js';
+import {openPopup, closePopup} from './scripts/utils.js';
+import {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic} from './scripts/constants.js';
 
 //Обрабатываем импортируемые константы. добавляем нужные
 const editButton = profile.querySelector('.profile__edit-button');

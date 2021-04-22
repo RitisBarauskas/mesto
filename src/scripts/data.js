@@ -1,27 +1,34 @@
+const alapaevsk = new URL('../images/places/alapaevsk.jpg', import.meta.url);
+const bashkiria = new URL('../images/places/bashkiria.jpg', import.meta.url);
+const permsky = new URL('../images/places/permsky.jpg', import.meta.url);
+const chusovaya = new URL('../images/places/chusovaya.jpg', import.meta.url);
+const usva = new URL('../images/places/usva.jpg', import.meta.url);
+const zilim = new URL('../images/places/zilim.jpg', import.meta.url);
+
 const initialCards = [
     {
       name: 'Алапаевск',
-      link: 'images/places/alapaevsk.jpg'
+      link: alapaevsk
     },
     {
       name: 'Башкирия',
-      link: 'images/places/bashkiria.jpg'
+      link: bashkiria
     },
     {
       name: 'Пермский край',
-      link: 'images/places/permsky.jpg'
+      link: permsky
     },
     {
       name: 'Пещера Чудесница (р. Чусовая)',
-      link: 'images/places/chusovaya.jpg'
+      link: chusovaya
     },
     {
       name: 'р. Усьва (Пермский край)',
-      link: 'images/places/usva.jpg'
+      link: usva
     },
     {
       name: 'р. Зилим (Башкирия)',
-      link: 'images/places/zilim.jpg'
+      link: zilim
     }
   ];
 

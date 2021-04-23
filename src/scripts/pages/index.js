@@ -1,9 +1,10 @@
-import './pages/index.css';
-import {initialCards, validConfig} from './scripts/data.js';
-import {Card} from './scripts/classes/card.js';
-import {FormValidator} from './scripts/classes/formvalidator.js';
-import {openPopup, closePopup} from './scripts/utils.js';
-import {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic} from './scripts/constants.js';
+// import '../../pages/index.css';
+import {initialCards, validConfig} from '../utils/data.js';
+import {Card} from '../components/card.js';
+import {FormValidator} from '../components/formvalidator.js';
+import {openPopup, closePopup} from '../utils/utils.js';
+import Section from '../components/section.js';
+import {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic} from '../utils/constants.js';
 
 //Обрабатываем импортируемые константы. добавляем нужные
 const editButton = profile.querySelector('.profile__edit-button');
@@ -21,6 +22,19 @@ const popupBigPicTitle = popupBigPic.querySelector('.popup__title');
 const validFormProfile = new FormValidator(validConfig, '.popup_edit-profile').enableValidation();
 const validFormNewCard = new FormValidator(validConfig, '.popup_new-card').enableValidation();
 
+//Генерация карточек при помощи Section
+const photoCards = new Section(
+    {
+        items: initialCards,
+        renderer: (item) => {
+            const photoCard = new Card('#place-card', () => showBigPic(item.name, item.link)).generateCard(item.name, item.link)
+            photoCards.addItem(photoCard);
+        }
+    }, '.places__list');
+
+photoCards.renderItems();
+
+
 //Функция наполнения и открытия попапа с большой картинкой - вызывает коллбэком в функции добавления карточки
 function showBigPic(name, link) {
     popupBigPicImage.src = link;
@@ -35,9 +49,9 @@ function createCard(selector, name, link) {
   }
 
 //Обрабатываем данные из Data, создаем первые карточки
-initialCards.forEach((item) => {
-    createCard('#place-card', item.name, item.link);
-})
+// initialCards.forEach((item) => {
+//     createCard('#place-card', item.name, item.link);
+// })
 
 //Навешиваем обработчик для закарытия попапов: запредельный клик или кнопка закрытия
 popups.forEach((popup) => {

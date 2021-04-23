@@ -1,9 +1,9 @@
-const alapaevsk = new URL('../images/places/alapaevsk.jpg', import.meta.url);
-const bashkiria = new URL('../images/places/bashkiria.jpg', import.meta.url);
-const permsky = new URL('../images/places/permsky.jpg', import.meta.url);
-const chusovaya = new URL('../images/places/chusovaya.jpg', import.meta.url);
-const usva = new URL('../images/places/usva.jpg', import.meta.url);
-const zilim = new URL('../images/places/zilim.jpg', import.meta.url);
+const alapaevsk = new URL('../../images/places/alapaevsk.jpg', import.meta.url);
+const bashkiria = new URL('../../images/places/bashkiria.jpg', import.meta.url);
+const permsky = new URL('../../images/places/permsky.jpg', import.meta.url);
+const chusovaya = new URL('../../images/places/chusovaya.jpg', import.meta.url);
+const usva = new URL('../../images/places/usva.jpg', import.meta.url);
+const zilim = new URL('../../images/places/zilim.jpg', import.meta.url);
 
 const initialCards = [
     {

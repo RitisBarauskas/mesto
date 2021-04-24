@@ -1,8 +1,7 @@
-const placesList = document.querySelector('.places__list');
-const popups = document.querySelectorAll('.popup');
-const popupNewCard = document.querySelector('.popup_new-card');
 const popupEditForm = document.querySelector('.popup_edit-profile');
-const profile = document.querySelector('.profile');
-const popupBigPic = document.querySelector('.popup_view-pic');
+const editButton = document.querySelector('.profile__edit-button');
+const nameInput = popupEditForm.querySelector('input[name="title"]');
+const jobInput = popupEditForm.querySelector('input[name="subtitle"]');
+const addButton = document.querySelector('.profile__add-button');
 
-export {placesList, profile, popups, popupNewCard, popupEditForm, popupBigPic}
+export {editButton, nameInput, jobInput, addButton}

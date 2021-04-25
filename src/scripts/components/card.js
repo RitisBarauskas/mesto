@@ -20,9 +20,9 @@ class Card {
         this._eventTarget.classList.toggle('element__like_active');
     }
 
-    _trash(evt) {
-        this._eventTarget = evt.target;
-        this._eventTarget.parentElement.remove();
+    _trash() {
+        this._card.remove();
+        this._card = null;
     }
 
     generateCard() {

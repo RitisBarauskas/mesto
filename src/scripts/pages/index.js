@@ -12,8 +12,10 @@ import PopupWithForm from '../components/popupwithform.js';
 const profileInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
 //Накладываем валидацию на формы (редактирования профиля и добавления новой карточки)
-const validFormProfile = new FormValidator(validConfig, '.popup_edit-profile').enableValidation();
-const validFormNewCard = new FormValidator(validConfig, '.popup_new-card').enableValidation();
+const validFormProfile = new FormValidator(validConfig, '.popup_edit-profile')
+validFormProfile.enableValidation();
+const validFormNewCard = new FormValidator(validConfig, '.popup_new-card')
+validFormNewCard.enableValidation();
 
 //Генерация карточек при помощи Section
 const photoCards = new Section(
@@ -24,41 +26,36 @@ const photoCards = new Section(
 
 photoCards.renderItems();
 
-//Функция наполнения и открытия попапа с большой картинкой - вызывает коллбэком в функции добавления карточки
-function showBigPic(name, link) {
-    const newPopup = new PopupWithImage('.popup_view-pic', name, link)
-    newPopup.open()
-    newPopup.setEventListeners();
-}
+// Создаем общий попап открытия картинки и навешиваем на него слушателя
+const popupBigPic = new PopupWithImage('.popup_view-pic')
+popupBigPic.setEventListeners()
 
-//Попап добавления новой карточки наложен на слушатель кнопки
-addButton.addEventListener('click', () => {
-    const addCard = new PopupWithForm('.popup_new-card', (items) => { 
+// Создаем попап-форму добавления новой карточки и навешиваем на нее слушателя + слушаем нажатие кнопки
+const popupNewCard = new PopupWithForm('.popup_new-card', (items) => { 
         createCard('#place-card', items.name, items.link)
-        addCard.reset();
+        popupNewCard.reset();
     });
-    addCard.open();
-    addCard.setEventListeners();
-});
+popupNewCard.setEventListeners();
+addButton.addEventListener('click', () => popupNewCard.open());
 
 //Функция создания новой карточки
 function createCard(selector, name, link) {
     const newCard = new Card({
         name: name,
         link: link,
-        handleCardClick: () => showBigPic(name, link)
+        handleCardClick: () => popupBigPic.open(name, link)
     }, selector).generateCard();
     photoCards.newAddItem(newCard);
-  }
+    }
 
-//Обрабатываем кнопку редактирования профиля
-editButton.addEventListener('click', () => {
-    const editForm = new PopupWithForm('.popup_edit-profile', () => {
-        profileInfo.setUserInfo(nameInput.value, jobInput.value)
+// Создаем попап-форму редактирования профиля и навешиваем на нее слушателя + слушаем кнопку
+const popupEditProfile = new PopupWithForm('.popup_edit-profile', () => {
+    profileInfo.setUserInfo(nameInput.value, jobInput.value)
     });
+popupEditProfile.setEventListeners();
+editButton.addEventListener('click', () => {
     const defaultDataProfile = profileInfo.getUserInfo()
     nameInput.value = defaultDataProfile.title;
     jobInput.value = defaultDataProfile.subtitle;
-    editForm.open();
-    editForm.setEventListeners();    
-  });
+    popupEditProfile.open();
+    });

@@ -10,6 +10,38 @@ import UserInfo from '../components/userinfo.js';
 import PopupWithForm from '../components/popupwithform.js';
 
 
+// const api = new Api({
+//     url: 'https://mesto.nomoreparties.co/v1/cohort-23/',
+//     headers: {
+//         authorization: '67508a95-3c83-40de-953a-884e486cfdce',
+//         "content-type": "application/json"
+//     }
+// })
+
+// const photoCards = new Section(
+//     {
+//         renderer: (item) => createCard('#place-card', item)    
+//     }, '.places__list');
+
+
+
+// function createCard(selector, data) {
+//     const card = new Card({
+//         data: data,
+//         handleCardClick: () => {},
+//         handleLikeClick: () => {},
+//         handleDeleteClick: () => {}
+//     }, selector).generateCard();
+//     photoCards.addItem(card);
+// }
+
+// // Генерация новых карточек
+// api.getDataCard()
+//     .then((data) => {
+//         photoCards.renderItems(data);
+//     })
+
+
 const cardsPhoto = new Section(
     {
         renderer: (item) => createCard('#place-card', item)    
@@ -41,6 +73,11 @@ function createCard(selector, data) {
 //Обрабатываем импортируемые константы. добавляем нужные
 const profileInfo = new UserInfo('.profile__title', '.profile__subtitle');
 
+cardsApi.getUser()
+    .then((data) => {
+        profileInfo.setUserInfo(data.name, data.about);
+    })
+
 //Накладываем валидацию на формы (редактирования профиля и добавления новой карточки)
 const validFormProfile = new FormValidator(validConfig, '.popup_edit-profile')
 validFormProfile.enableValidation();
@@ -64,7 +101,14 @@ addButton.addEventListener('click', () => popupNewCard.open());
 
 // Создаем попап-форму редактирования профиля и навешиваем на нее слушателя + слушаем кнопку
 const popupEditProfile = new PopupWithForm('.popup_edit-profile', () => {
-    profileInfo.setUserInfo(nameInput.value, jobInput.value)
+    cardsApi.editProfile({
+        name: nameInput.value,
+        about: jobInput.value
+    })
+    .then((data) => {
+        profileInfo.setUserInfo(data.name, data.about)
+    })
+    
     });
 popupEditProfile.setEventListeners();
 editButton.addEventListener('click', () => {

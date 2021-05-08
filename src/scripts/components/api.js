@@ -73,4 +73,19 @@ export default class Api {
         })
         .catch((err) => console.log(err));
     }
+
+    editProfile(data) {
+        return fetch(this._url+`users/me`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            if (res.ok){
+                return res.json();
+            }
+            return Promise.reject('Профиль отредактировать не получилось')
+        })
+        .catch((err) => console.log(err));
+    }
 }

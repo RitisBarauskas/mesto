@@ -14,6 +14,7 @@
 @import url('../blocks/profile/__subtitle/profile__subtitle.css');
 @import url('../blocks/profile/__edit-button/profile__edit-button.css');
 @import url('../blocks/profile/__add-button/profile__add-button.css');
+@import url('../blocks/profile/__edit-avatar/profile__edit-avatar.css');
 @import url('../blocks/places/places.css');
 @import url('../blocks/element/element.css');
 @import url('../blocks/places/__list/places__list.css');
@@ -44,3 +45,5 @@
 @import url('../blocks/popup/__container/_view-pic/popup__container_view-pic.css');
 @import url('../blocks/popup/__title/_view-pic/popup__title_view-pic.css');
 @import url('../blocks/popup/__image/popup__image.css');
+@import url('../blocks/popup/__title/_delete-card/popup__title_delete-card.css');
+@import url('../blocks/popup/__button/_delete-card/popup__button_delete-card.css');

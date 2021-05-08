@@ -16,7 +16,9 @@
       <main class="main">
         <section class="profile">
           <div class="profile__group">
-            <div class="profile__avatar"></div>            
+            <div class="profile__avatar">
+              <div class="profile__edit-avatar"></div>
+            </div>            
             <div class="profile__info">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
               <button type="button" class="profile__edit-button"></button>
@@ -53,6 +55,21 @@
       <button type="button" class="popup__close"></button>
     </div>             
   </div>
+  <div class="popup popup_edit-avatar">
+    <div class="popup__container">
+      <h2 class="popup__title">
+        Обновить аватар
+      </h2> 
+      <form class="popup__form" name="avatar-form">
+        <label class="popup__label">
+          <input class="popup__input" id="url-input" type="url" name="link" value="" placeholder="Ссылка на аватар" required>
+          <span class="url-input-error"></span>
+        </label>
+        <input class="popup__button popup__button_disabled" type="submit" value="Сохранить">
+      </form>
+      <button type="button" class="popup__close"></button>
+    </div>             
+  </div>
   <div class="popup popup_new-card">
     <div class="popup__container">
       <h2 class="popup__title">
@@ -77,6 +94,18 @@
       <h2 class="popup__title popup__title_view-pic">
       </h2>
       <img src="#" alt="#" class="popup__image">
+      <button type="button" class="popup__close"></button>
+    </div>
+  </div>
+  <div class="popup popup_delete-card">               
+    <div class="popup__container popup__container_delete-card">
+      <h2 class="popup__title popup__title_delete-card">
+        Вы уверены?
+      </h2>
+      <form class="popup__form popup__form_delete-card" name="delete-card">
+        <input type="hidden" value="" id="id-card">
+        <input class="popup__button popup__button_delete-card" type="submit" value="Да">
+      </form>
       <button type="button" class="popup__close"></button>
     </div>
   </div>

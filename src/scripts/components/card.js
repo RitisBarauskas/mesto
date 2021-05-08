@@ -1,3 +1,41 @@
+class newCard {
+    constructor({data, handleCardClick, handleLikeClick, handleDeleteClick}, cardSelector) {
+        this._id = data._id;
+        this._link = data.link;
+        this._name = data.name;
+        this._likes = data.likes;
+        this._cardSelector = cardSelector;
+        this.handleCardClick = handleCardClick;
+        this.handleLikeClick = handleLikeClick;
+        this.handleDeleteClick = handleDeleteClick;
+    }
+
+    _getTemplate() {
+        this._cardElement = document
+            .querySelector(this.cardSelector)
+            .content
+            .querySelector('.element')
+            .cloneNode(true);
+        return this._cardElement;
+    }
+
+    generateCard() {        
+        this._card = this._getTemplate();
+        this._card.querySelector('.element__title').textContent = this._name;
+        this._card.querySelector('.element__likes-count').textContent = this._likes.length;
+        this._cardImage = this._card.querySelector('.element__image');
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._card.querySelector('.element__like').addEventListener('click', () => this.handleLikeClick(this._id));
+        this._card.querySelector('.element__trash').addEventListener('click', () => this.handleDeleteClick(this._id));
+        this._card.querySelector('.element__image').addEventListener('click', () => this.handleCardClick());
+        this._card.querySelector('.element__likes-count').textContent = this._likes.length;
+        return this._card;
+      }
+}
+
+
+
 class Card {
     constructor({data, handleCardClick}, cardSelector, api) {
         this._id = data._id,

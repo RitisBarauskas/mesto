@@ -88,4 +88,35 @@ export default class Api {
         })
         .catch((err) => console.log(err));
     }
+
+    udateAvatar(data) {
+        return fetch(this._url+`users/me/avatar`, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify(data)
+        })
+        .then((res) => {
+            if (res.ok){
+                return res.json();
+            }
+            return Promise.reject('Аватар обновить не получилось')
+        })
+        .catch((err) => console.log(err));
+    }
+
+    deleteCard(id) {
+        return fetch(this._url+`cards/${id}`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+        .then((res) => {
+            if (res.ok){
+                return res.json();
+            }
+            return Promise.reject('Карточку удалить не удалось')
+        })
+        .catch((err) => console.log(err));
+    }
+
+
 }

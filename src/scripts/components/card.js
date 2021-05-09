@@ -21,16 +21,6 @@ export default class Card {
         return this._cardElement;
     }
 
-    _like(evt) {
-        this._eventTarget = evt.target;
-        this._eventTarget.classList.toggle('element__like_active');
-    }
-
-    _trash() {
-        this._card.remove();
-        this._card = null;
-    }
-
     generateCard() {
         this._likes.forEach((item) => {                     
             this._user.then((res) => {

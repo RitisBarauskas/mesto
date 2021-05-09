@@ -1,4 +1,4 @@
-// import '../../pages/index.css';
+import '../../pages/index.css';
 import {validConfig} from '../utils/data.js';
 import Api from '../components/api.js';
 import Card from '../components/card.js';

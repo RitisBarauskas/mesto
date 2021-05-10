@@ -1,15 +1,15 @@
-import '../../pages/index.css';
-import {validConfig} from '../utils/data.js';
-import Api from '../components/api.js';
-import Card from '../components/card.js';
-import {FormValidator} from '../components/formvalidator.js';
-import Section from '../components/section.js';
-import {editButton, nameInput, jobInput, addButton, edtiAvatarButton, avtarLink} from '../utils/constants.js';
-import PopupWithImage from '../components/popupwithimage.js';
-import UserInfo from '../components/userinfo.js';
-import PopupWithForm from '../components/popupwithform.js';
-import PopupWithSubmit from '../components/PopupWithSubmit.js';
-import PopupChangeAvatar from '../components/PopupChangeAvatar.js';
+import './index.css';
+import {validConfig} from '../scripts/utils/data.js';
+import Api from '../scripts/components/Api.js';
+import Card from '../scripts/components/Card.js';
+import {FormValidator} from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import {editButton, nameInput, jobInput, addButton, edtiAvatarButton, avtarLink} from '../scripts/utils/constants.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithSubmit from '../scripts/components/PopupWithSubmit.js';
+import PopupChangeAvatar from '../scripts/components/PopupChangeAvatar.js';
 
 
 const api = new Api({
@@ -56,20 +56,14 @@ const popupNewCard = new PopupWithForm('.popup_new-card', (items) => {
         .then((data) => {
             createCard('#place-card', data);
             popupNewCard.reset();
-        }).finally(renderLoading(false));        
+        }).finally(renderLoading(false, button, null, 'Создать'));        
 });
 popupNewCard.setEventListeners();
 addButton.addEventListener('click', () => popupNewCard.open());
 
 
 // Попап с подтверждением удаления
-const popupDeleteCard = new PopupWithSubmit('.popup_delete-card', (idCard, card) => {
-    api.deleteCard(idCard)
-        .then((res) => {
-            card.remove();
-            card = null;
-        })
-})
+const popupDeleteCard = new PopupWithSubmit('.popup_delete-card')
 popupDeleteCard.setEventListeners();
 
 
@@ -96,10 +90,14 @@ function createCard(selector, data) {
                 })
             }            
         },
-        handleDeleteCardClick: (evt) => {
-            popupDeleteCard.open();
-            popupDeleteCard.setSubmitAction(data._id, evt);
-            
+        handleDeleteCardClick: () => { 
+            popupDeleteCard.setSubmitAction(() => {
+                api.deleteCard(data._id)
+                    .then((res) => {
+                        newCard.remove();
+                    })
+            });
+            popupDeleteCard.open();            
         }
     }, selector).generateCard();
     photoCards.addItem(newCard);
@@ -116,7 +114,7 @@ const popupEditProfile = new PopupWithForm('.popup_edit-profile', () => {
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading());
+    }).finally(renderLoading(false, button, null, 'Сохранить'));
     
     });
 popupEditProfile.setEventListeners();
@@ -127,9 +125,11 @@ editButton.addEventListener('click', () => {
     popupEditProfile.open();
     });
 
-function renderLoading(isLoading, button=null, LoadText=null) {
+function renderLoading(isLoading, button, loadText=null, defaultText=null) {
     if (isLoading) {
-        button.value = LoadText
+        button.value = loadText
+    } else {
+        button.value = defaultText
     }
 }
 
@@ -142,7 +142,7 @@ const popupChangeAvatar = new PopupChangeAvatar('.popup_edit-avatar', () => {
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading(false));
+    }).finally(renderLoading(false, button, null, 'Сохранить'));
 })
 popupChangeAvatar.setEventListeners();
 edtiAvatarButton.addEventListener('click', () => {

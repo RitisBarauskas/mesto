@@ -1,4 +1,4 @@
-import Popup from './popup.js';
+import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
     constructor(idCard) {
@@ -7,6 +7,6 @@ export default class PopupWithForm extends Popup {
     }
 
     deleteCard() {
-        
+        console.log('hellow');
     }
 }

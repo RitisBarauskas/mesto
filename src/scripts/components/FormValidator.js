@@ -1,5 +1,3 @@
-
-
 class FormValidator {
 
     constructor(config, selector) {

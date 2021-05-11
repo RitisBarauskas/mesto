@@ -1,6 +1,6 @@
 export default class Card {
-    constructor({user, data, handleCardClick, handleLikeClick, handleDeleteCardClick}, cardSelector) {
-        this._user = user;
+    constructor({userID, data, handleCardClick, handleLikeClick, handleDeleteCardClick}, cardSelector) {
+        this._userID = userID;
         this._id = data._id;
         this._link = data.link;
         this._name = data.name;
@@ -22,22 +22,18 @@ export default class Card {
     }
 
     generateCard() {
-        this._likes.forEach((item) => {                     
-            this._user.then((res) => {
-                if (res._id == item._id) {
-                    this._card.querySelector('.element__like').classList.add('element__like_active');
-                }
-            });
-        })
-        this._user.then((res) => {
-            const trashElement = this._card.querySelector('.element__trash');
-            if (this._author._id == res._id) {
-                trashElement.addEventListener('click', (evt) => this.handleDeleteCardClick(this._card));
-            } else {
-                trashElement.remove();
+        this._card = this._getTemplate();
+        this._trashElement = this._card.querySelector('.element__trash');
+        if (this._author._id == this._userID) {
+            this._trashElement.addEventListener('click', (evt) => this.handleDeleteCardClick(this._card));
+        } else {
+            this._trashElement.remove();
+        }
+        this._likes.forEach((item) => {
+            if (this._userID == item._id) {
+                this._card.querySelector('.element__like').classList.add('element__like_active');
             }
         })
-        this._card = this._getTemplate();
         this._card.querySelector('.element__title').textContent = this._name;
         this._card.querySelector('.element__likes-count').textContent = this._likes.length;
         this._cardImage = this._card.querySelector('.element__image');

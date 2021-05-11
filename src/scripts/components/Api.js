@@ -4,6 +4,10 @@ export default class Api {
         this._headers = config.headers;
     }
 
+    getInitialData() {
+        return Promise.all([this.getDataCard(), this.getUser()])
+    }
+
     getDataCard() {
         return fetch(this._url+`cards`, {
             headers: this._headers

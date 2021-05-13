@@ -4,7 +4,18 @@ import Api from '../scripts/components/Api.js';
 import Card from '../scripts/components/Card.js';
 import {FormValidator} from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
-import {editButton, nameInput, jobInput, addButton, edtiAvatarButton, avtarLink} from '../scripts/utils/constants.js';
+import {
+    editButton, 
+    nameInput, 
+    jobInput, 
+    addButton, 
+    edtiAvatarButton, 
+    avtarLink, 
+    buttonFormSubmit, 
+    buttonNewCard, 
+    buttonEditProfile, 
+    buttonChangeAvatar
+} from '../scripts/utils/constants.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
@@ -42,13 +53,12 @@ popupBigPic.setEventListeners()
 
 // Создаем попап-форму добавления новой карточки и навешиваем на нее слушателя + слушаем нажатие кнопки
 const popupNewCard = new PopupWithForm('.popup_new-card', (items) => {
-    const button = document.querySelector('.popup_new-card').querySelector('.popup__button');
-    renderLoading(true, button, 'Сохранение...');
+    renderLoading(true, buttonNewCard, 'Сохранение...');
     api.addCard(items)
         .then((data) => {
             createCard('#place-card', data);
             popupNewCard.reset();
-        }).finally(renderLoading(false, button, null, 'Создать'));        
+        }).finally(renderLoading(false, buttonNewCard, null, 'Создать'));        
 });
 popupNewCard.setEventListeners();
 addButton.addEventListener('click', () => popupNewCard.open());
@@ -58,16 +68,15 @@ const popupDeleteCard = new PopupWithSubmit('.popup_delete-card')
 popupDeleteCard.setEventListeners();
 
 // Создаем попап-форму редактирования профиля и навешиваем на нее слушателя + слушаем кнопку
-const popupEditProfile = new PopupWithForm('.popup_edit-profile', () => {
-    const button = document.querySelector('.popup_edit-profile').querySelector('.popup__button');
-    renderLoading(true, button, 'Сохранение...');
+const popupEditProfile = new PopupWithForm('.popup_edit-profile', (data) => {
+    renderLoading(true, buttonEditProfile, 'Сохранение...');
     api.editProfile({
-        name: nameInput.value,
-        about: jobInput.value
+        name: data.title,
+        about: data.subtitle
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading(false, button, null, 'Сохранить'));
+    }).finally(renderLoading(false, buttonEditProfile, null, 'Сохранить'));
     
     });
 popupEditProfile.setEventListeners();
@@ -87,20 +96,18 @@ function renderLoading(isLoading, button, loadText=null, defaultText=null) {
 }
 
 // Попап изменения аватара
-const popupChangeAvatar = new PopupWithForm('.popup_edit-avatar', () => {
-    const button = document.querySelector('.popup_edit-avatar').querySelector('.popup__button');
-    renderLoading(true, button, 'Сохранение...');
+const popupChangeAvatar = new PopupWithForm('.popup_edit-avatar', (data) => {
+    renderLoading(true, buttonChangeAvatar, 'Сохранение...');
     api.udateAvatar({
-        avatar: avtarLink.value,
+        avatar: data.linkAvatar,
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading(false, button, null, 'Сохранить'));
+    }).finally(renderLoading(false, buttonChangeAvatar, null, 'Сохранить'));
 })
 popupChangeAvatar.setEventListeners();
 edtiAvatarButton.addEventListener('click', () => {
-    const defaultDataProfile = profileInfo.getUserInfo();
-    avtarLink.value = defaultDataProfile.urlAvatar.slice(5, defaultDataProfile.urlAvatar.length-2);
+    avtarLink.value = '';
     popupChangeAvatar.open();
 })
 
@@ -129,12 +136,11 @@ function createCard(selector, data) {
         },
         handleDeleteCardClick: () => { 
             popupDeleteCard.setSubmitAction(() => {
-                const button = document.querySelector('.popup_delete-card').querySelector('.popup__button');
-                renderLoading(true, button, 'Удаление...');
+                renderLoading(true, buttonFormSubmit, 'Удаление...');
                 api.deleteCard(data._id)
                     .then((res) => {
                         newCard.remove();
-                    }).finally(renderLoading(false, button, null, 'Да')); 
+                    }).finally(renderLoading(false, buttonFormSubmit, null, 'Да')); 
             });
             popupDeleteCard.open();            
         }

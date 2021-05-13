@@ -4,6 +4,13 @@ export default class Api {
         this._headers = config.headers;
     }
 
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+    }
+
     getInitialData() {
         return Promise.all([this.getDataCard(), this.getUser()])
     }
@@ -12,13 +19,7 @@ export default class Api {
         return fetch(this._url+`cards`, {
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Ошибка произошла, понимаешь')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     addCard(data) {
@@ -27,13 +28,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Карточку добавить не получилось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     addLike(id) {
@@ -41,13 +36,7 @@ export default class Api {
             method: 'PUT',
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Лайк поставить не удалось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     deleteLike(id) {
@@ -55,13 +44,7 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Лайк удалить не удалось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     getUser() {
@@ -69,13 +52,7 @@ export default class Api {
             method: 'GET',
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Получить ID пользователя не удалось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     editProfile(data) {
@@ -84,13 +61,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Профиль отредактировать не получилось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     udateAvatar(data) {
@@ -99,13 +70,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify(data)
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Аватар обновить не получилось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
 
     deleteCard(id) {
@@ -113,14 +78,6 @@ export default class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then((res) => {
-            if (res.ok){
-                return res.json();
-            }
-            return Promise.reject('Карточку удалить не удалось')
-        })
-        .catch((err) => console.log(err));
+        .then(this._checkResponse);
     }
-
-
 }

@@ -9,8 +9,7 @@ import {
     nameInput, 
     jobInput, 
     addButton, 
-    edtiAvatarButton, 
-    avtarLink, 
+    edtiAvatarButton,
     buttonFormSubmit, 
     buttonNewCard, 
     buttonEditProfile, 
@@ -56,9 +55,11 @@ const popupNewCard = new PopupWithForm('.popup_new-card', (items) => {
     renderLoading(true, buttonNewCard, 'Сохранение...');
     api.addCard(items)
         .then((data) => {
-            createCard('#place-card', data);
-            popupNewCard.reset();
-        }).finally(renderLoading(false, buttonNewCard, null, 'Создать'));        
+            createCard('#place-card', data);            
+        })
+        .then(() => popupNewCard.close())
+        .catch((err) => console.log(err))
+        .finally(renderLoading(false, buttonNewCard, null, 'Создать'));        
 });
 popupNewCard.setEventListeners();
 addButton.addEventListener('click', () => popupNewCard.open());
@@ -76,7 +77,10 @@ const popupEditProfile = new PopupWithForm('.popup_edit-profile', (data) => {
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading(false, buttonEditProfile, null, 'Сохранить'));
+    })
+    .then(() => popupEditProfile.close())
+    .catch((err) => console.log(err))
+    .finally(renderLoading(false, buttonEditProfile, null, 'Сохранить'));
     
     });
 popupEditProfile.setEventListeners();
@@ -89,9 +93,9 @@ editButton.addEventListener('click', () => {
 
 function renderLoading(isLoading, button, loadText=null, defaultText=null) {
     if (isLoading) {
-        button.value = loadText
+        button.value = loadText;
     } else {
-        button.value = defaultText
+        button.value = defaultText;
     }
 }
 
@@ -103,11 +107,13 @@ const popupChangeAvatar = new PopupWithForm('.popup_edit-avatar', (data) => {
     })
     .then((data) => {
         profileInfo.setUserInfo(data.name, data.about, data.avatar);
-    }).finally(renderLoading(false, buttonChangeAvatar, null, 'Сохранить'));
+    })
+    .then(() => popupChangeAvatar.close())
+    .catch((err) => console.log(err))
+    .finally(renderLoading(false, buttonChangeAvatar, null, 'Сохранить'));
 })
 popupChangeAvatar.setEventListeners();
 edtiAvatarButton.addEventListener('click', () => {
-    avtarLink.value = '';
     popupChangeAvatar.open();
 })
 
@@ -117,22 +123,20 @@ function createCard(selector, data) {
         userID: userID,
         data: data,
         handleCardClick: () => popupBigPic.open(data.name, data.link),
-        handleLikeClick: (evt) => {
-            const likeElementButton = evt.querySelector('.element__like');
-            const likeElementCount = evt.querySelector('.element__likes-count');
-            if (likeElementButton.classList.contains('element__like_active')){
+        handleLikeClick: (card) => {
+            if (card.isLiked()) {
                 api.deleteLike(data._id)
                     .then((res) => {
-                        likeElementButton.classList.remove('element__like_active');
-                        likeElementCount.textContent = res.likes.length;
+                        card.updateLikes(res)
                     })
+                    .catch((err) => console.log(err))
             } else {
                 api.addLike(data._id)
-                .then((res) => {
-                    likeElementButton.classList.add('element__like_active');
-                    likeElementCount.textContent = res.likes.length;
-                })
-            }            
+                    .then((res) => {
+                        card.updateLikes(res)
+                    })
+                    .catch((err) => console.log(err))
+            }
         },
         handleDeleteCardClick: () => { 
             popupDeleteCard.setSubmitAction(() => {
@@ -140,7 +144,10 @@ function createCard(selector, data) {
                 api.deleteCard(data._id)
                     .then((res) => {
                         newCard.remove();
-                    }).finally(renderLoading(false, buttonFormSubmit, null, 'Да')); 
+                    })
+                    .then(() => popupDeleteCard.close())
+                    .catch((err) => console.log(err))
+                    .finally(renderLoading(false, buttonFormSubmit, null, 'Да')); 
             });
             popupDeleteCard.open();            
         }

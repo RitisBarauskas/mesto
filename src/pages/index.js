@@ -59,7 +59,7 @@ const popupNewCard = new PopupWithForm('.popup_new-card', (items) => {
         })
         .then(() => popupNewCard.close())
         .catch((err) => console.log(err))
-        .finally(renderLoading(false, buttonNewCard, null, 'Создать'));        
+        .finally(() => renderLoading(false, buttonNewCard, null, 'Создать'));        
 });
 popupNewCard.setEventListeners();
 addButton.addEventListener('click', () => popupNewCard.open());
@@ -80,7 +80,7 @@ const popupEditProfile = new PopupWithForm('.popup_edit-profile', (data) => {
     })
     .then(() => popupEditProfile.close())
     .catch((err) => console.log(err))
-    .finally(renderLoading(false, buttonEditProfile, null, 'Сохранить'));
+    .finally(() => renderLoading(false, buttonEditProfile, null, 'Сохранить'));
     
     });
 popupEditProfile.setEventListeners();
@@ -110,7 +110,7 @@ const popupChangeAvatar = new PopupWithForm('.popup_edit-avatar', (data) => {
     })
     .then(() => popupChangeAvatar.close())
     .catch((err) => console.log(err))
-    .finally(renderLoading(false, buttonChangeAvatar, null, 'Сохранить'));
+    .finally(() => renderLoading(false, buttonChangeAvatar, null, 'Сохранить'));
 })
 popupChangeAvatar.setEventListeners();
 edtiAvatarButton.addEventListener('click', () => {
@@ -147,7 +147,7 @@ function createCard(selector, data) {
                     })
                     .then(() => popupDeleteCard.close())
                     .catch((err) => console.log(err))
-                    .finally(renderLoading(false, buttonFormSubmit, null, 'Да')); 
+                    .finally(() => renderLoading(false, buttonFormSubmit, null, 'Да')); 
             });
             popupDeleteCard.open();            
         }

@@ -25,6 +25,7 @@
 ### Развитие проекта
 Использование React
 * проект полностью обновлен в июне 2021 года. Перепиан и спользованием react.js [репозиторий](https://github.com/RitisBarauskas/react-mesto-auth)
+* в июле 2021 года с использованием node.js и фреймворка express.js написана сервеная часть проекта. [репозиторий](https://github.com/RitisBarauskas/express-mesto)
 
 ### Об авторе
 
